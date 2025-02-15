@@ -4,6 +4,7 @@ import React from "react"
 import { useState, useEffect } from "react"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import { AlertCircle, CheckCircle } from "lucide-react"
+import Footer from "./Footer"
 
 // interface SensorData {
 //   timestamp: string
@@ -33,7 +34,7 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 mt-20">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Real-time Monitoring Dashboard</h1>
         <div className="flex items-center space-x-4">
@@ -65,7 +66,7 @@ export default function Dashboard() {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Vibration</h3>
+          <h3 className="text-lg font-semibold mb-4">Footfall</h3>
           <div className="h-[200px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={sensorData}>
@@ -80,7 +81,7 @@ export default function Dashboard() {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Pressure</h3>
+          <h3 className="text-lg font-semibold mb-4">Ultra Sonic Sensor</h3>
           <div className="h-[200px]">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={sensorData}>
@@ -105,6 +106,9 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   )
