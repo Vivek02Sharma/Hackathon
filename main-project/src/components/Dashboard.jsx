@@ -23,8 +23,15 @@ export default function Dashboard() {
       const newData = {
         timestamp: new Date().toLocaleTimeString(),
         temperature: Math.random() * 100 + 50,
-        vibration: Math.random() * 10,
-        pressure: Math.random() * 50 + 100,
+        footfall: Math.random() * 10,
+        uss: Math.random() * 50 + 100,
+        cs: Math.random() * 50 + 100,
+        voc: Math.random() * 50 + 100,
+        rp: Math.random() * 50 + 100,
+        ip: Math.random() * 50 + 100,
+        aq: Math.random() * 50 + 100,
+        tempMode: Math.random() * 50 + 100,
+        fail: Math.random() * 50 + 100,
       }
 
       setSensorData((prev) => [...prev.slice(-20), newData])
@@ -49,7 +56,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 gap-6">
         <div className="bg-white p-6 rounded-lg shadow-sm">
           <h3 className="text-lg font-semibold mb-4">Temperature</h3>
           <div className="h-[200px]">
@@ -71,7 +78,7 @@ export default function Dashboard() {
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={sensorData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
+                <XAxis dataKey="footfall" />
                 <YAxis />
                 <Tooltip />
                 <Line type="monotone" dataKey="vibration" stroke="#82ca9d" />
@@ -86,7 +93,7 @@ export default function Dashboard() {
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={sensorData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
+                <XAxis dataKey="uss" />
                 <YAxis />
                 <Tooltip />
                 <Line type="monotone" dataKey="pressure" stroke="#ffc658" />
@@ -94,6 +101,112 @@ export default function Dashboard() {
             </ResponsiveContainer>
           </div>
         </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm">
+          <h3 className="text-lg font-semibold mb-4">Current Sensor</h3>
+          <div className="h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={sensorData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="timestamp" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="cs" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm">
+          <h3 className="text-lg font-semibold mb-4">Volatile Organic Compounds</h3>
+          <div className="h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={sensorData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="timestamp" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="voc" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm">
+          <h3 className="text-lg font-semibold mb-4">Relative Pressure</h3>
+          <div className="h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={sensorData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="timestamp" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="rp" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm">
+          <h3 className="text-lg font-semibold mb-4">Input Power</h3>
+          <div className="h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={sensorData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="timestamp" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="ip" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm">
+          <h3 className="text-lg font-semibold mb-4">Air Quality</h3>
+          <div className="h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={sensorData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="timestamp" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="aq" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm">
+          <h3 className="text-lg font-semibold mb-4">Ambient Temperature Mode</h3>
+          <div className="h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={sensorData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="timestamp" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="tempMode" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-sm">
+          <h3 className="text-lg font-semibold mb-4">Fail</h3>
+          <div className="h-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={sensorData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="timestamp" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="fail" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-sm">
@@ -107,6 +220,9 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      
+      
       <div>
         <Footer />
       </div>
