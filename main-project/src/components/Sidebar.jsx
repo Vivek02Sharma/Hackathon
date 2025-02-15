@@ -12,6 +12,7 @@ export default function Sidebar() {
     <div className="fixed top-0 left-0 right-0 bg-custom-gray bg-opacity-80 backdrop-blur-sm text-white p-4 z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center">
+          <img src="../public/logo.png" alt="SensoPredict Logo" className="h-8 w-8 rounded-full mr-2" />
           <h1 className="text-2xl font-bold mr-4">SensoPredict</h1>
           <p className="text-blue-300 text-sm hidden md:block">Smart Maintenance Guardian</p>
         </div>
@@ -26,7 +27,7 @@ export default function Sidebar() {
           </Link>
 
           <Link
-            to="/"
+            to="/dashboard"
             className={`flex items-center space-x-2 p-2 rounded-lg hover:bg-custom-gray-dark transition-colors ${isActive("/dashboard")}`}
           >
             <BarChart2 className="w-5 h-5" />

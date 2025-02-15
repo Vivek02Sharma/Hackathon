@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { ArrowRight } from "lucide-react"
+import Footer from "./Footer"
 
 export default function LandingPage() {
   return (
@@ -8,7 +9,7 @@ export default function LandingPage() {
       <div
         className="relative h-screen flex items-center justify-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://www.pragmaworld.net/wp-content/uploads/AdobeStock_328914876-1-1320x743.jpeg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -18,17 +19,17 @@ export default function LandingPage() {
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
             Predict Tomorrow's Maintenance
-            <span className="text-black"> Today</span>
+            <span className="text-custom-gray"> Today</span>
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-200">
             Advanced AI-powered predictive maintenance system that helps you prevent equipment failures before they
             occur
           </p>
           <Link
-            to="/"
+            to="/dashboard"
             className="inline-flex items-center px-8 py-3 text-lg font-medium text-white bg-custom-gray rounded-lg hover:bg-custom-gray-dark transition-colors duration-300"
           >
-            Get Started
+            Try Out
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </div>
@@ -44,8 +45,8 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="text-center p-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 bg-custom-gray rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-custom-gray-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
@@ -56,8 +57,8 @@ export default function LandingPage() {
             </div>
 
             <div className="text-center p-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 bg-custom-gray rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-custom-gray-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -71,8 +72,8 @@ export default function LandingPage() {
             </div>
 
             <div className="text-center p-6">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 bg-custom-gray rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-custom-gray-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -89,6 +90,7 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
