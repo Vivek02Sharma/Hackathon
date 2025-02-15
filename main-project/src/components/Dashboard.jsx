@@ -1,44 +1,46 @@
 "use client"
 
-import React from "react"
-import { useState, useEffect } from "react"
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
-import { AlertCircle, CheckCircle } from "lucide-react"
-import Footer from "./Footer"
-
-// interface SensorData {
-//   timestamp: string
-//   temperature: number
-//   vibration: number
-//   pressure: number
-// }
+import React, { useState, useEffect } from "react";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { AlertCircle, CheckCircle } from "lucide-react";
+import Footer from "./Footer";
+import { fetchSensorData } from "./database";
+import data from "./data.json"
 
 export default function Dashboard() {
-  const [sensorData, setSensorData] = useState([])
-  const [alerts, setAlerts] = useState(0)
+  const [sensorData, setSensorData] = useState([]);
+  const [alerts, setAlerts] = useState(0);
 
   useEffect(() => {
-    // Simulate real-time data updates
-    const interval = setInterval(() => {
-      const newData = {
-        timestamp: new Date().toLocaleTimeString(),
-        temperature: Math.random() * 100 + 50,
-        footfall: Math.random() * 10,
-        uss: Math.random() * 50 + 100,
-        cs: Math.random() * 50 + 100,
-        voc: Math.random() * 50 + 100,
-        rp: Math.random() * 50 + 100,
-        ip: Math.random() * 50 + 100,
-        aq: Math.random() * 50 + 100,
-        tempMode: Math.random() * 50 + 100,
-        fail: Math.random() * 50 + 100,
+    const fetchData = async () => {
+      try {
+        
+        const formattedData = data.map((item) => ({
+          timestamp: new Date().toLocaleTimeString(),
+          footfall: item.footfall,
+          tempMode: item.tempMode,
+          aq: item.AQ,
+          uss: item.USS,
+          cs: item.CS,
+          voc: item.VOC,
+          rp: item.RP,
+          ip: item.IP,
+          temperature: item.Temperature,
+          fail: item.fail,
+        }));
+
+        setSensorData((prev) => [...prev.slice(-20), ...formattedData]);
+      } catch (error) {
+        console.error("Error fetching sensor data:", error);
       }
+    };
 
-      setSensorData((prev) => [...prev.slice(-20), newData])
-    }, 1000)
+    // Fetch data initially and then every 5 seconds
+    fetchData();
+    const interval = setInterval(fetchData, 5000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="p-6 space-y-6 mt-20">
@@ -57,156 +59,33 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-2 gap-6">
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Temperature</h3>
-          <div className="h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sensorData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
-              </LineChart>
-            </ResponsiveContainer>
+        {[
+          { key: "temperature", label: "Temperature" },
+          { key: "footfall", label: "Footfall" },
+          { key: "uss", label: "Ultra Sonic Sensor" },
+          { key: "cs", label: "Current Sensor" },
+          { key: "voc", label: "Volatile Organic Compounds" },
+          { key: "rp", label: "Relative Pressure" },
+          { key: "ip", label: "Input Power" },
+          { key: "aq", label: "Air Quality" },
+          { key: "tempMode", label: "Ambient Temperature Mode" },
+          { key: "fail", label: "Fail" },
+        ].map(({ key, label }) => (
+          <div key={key} className="bg-white p-6 rounded-lg shadow-sm">
+            <h3 className="text-lg font-semibold mb-4">{label}</h3>
+            <div className="h-[200px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={sensorData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="timestamp" />
+                  <YAxis />
+                  <Tooltip />
+                  <Line type="monotone" dataKey={key} stroke="#8884d8" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Footfall</h3>
-          <div className="h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sensorData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="footfall" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="vibration" stroke="#82ca9d" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Ultra Sonic Sensor</h3>
-          <div className="h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sensorData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="uss" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="pressure" stroke="#ffc658" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Current Sensor</h3>
-          <div className="h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sensorData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="cs" stroke="#8884d8" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Volatile Organic Compounds</h3>
-          <div className="h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sensorData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="voc" stroke="#8884d8" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Relative Pressure</h3>
-          <div className="h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sensorData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="rp" stroke="#8884d8" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Input Power</h3>
-          <div className="h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sensorData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="ip" stroke="#8884d8" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Air Quality</h3>
-          <div className="h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sensorData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="aq" stroke="#8884d8" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Ambient Temperature Mode</h3>
-          <div className="h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sensorData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="tempMode" stroke="#8884d8" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Fail</h3>
-          <div className="h-[200px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={sensorData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="timestamp" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="fail" stroke="#8884d8" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
+        ))}
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-sm">
@@ -221,12 +100,9 @@ export default function Dashboard() {
         </div>
       </div>
 
-      
-      
       <div>
         <Footer />
       </div>
     </div>
-  )
+  );
 }
-
