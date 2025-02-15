@@ -20,20 +20,18 @@ Dashboard Visualization: Provides intuitive charts and graphs for monitoring ass
 
 # Tech Stack
 
-Backend: Python (Flask/FastAPI), Node.js (if applicable)
+Backend: Python (Flask/FastAPI), Node.js
 
 Machine Learning: Scikit-learn, TensorFlow/PyTorch
 
-Database: PostgreSQL, MongoDB
+Database:  MongoDB
 
 Frontend: React.js with Tailwind CSS
-
-Deployment: Docker, Kubernetes, AWS/GCP/Azure
 
 # Installation
 
 # Clone the repository
-git clone https://github.com/Vivek02Sharma/Hackathon.git
+git clone https://github.com/Vivek02Sharma/Hackathon.git <br />
 cd Hackathon
 
 # Install dependencies
@@ -44,8 +42,8 @@ cd main-project <br />
 npm install  # For frontend with React
 
 # Run the application
-python app.py  # If using Flask/FastAPI <br />
-npm start  # If using React frontend <br />
+python app.py  # for Flask/FastAPI <br />
+npm start  # for React frontend <br />
 
 # Contributing
 
