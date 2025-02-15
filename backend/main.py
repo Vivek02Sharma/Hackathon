@@ -4,7 +4,7 @@ import pickle
 import pandas as pd
 from pymongo import MongoClient
 
-MONGO_URL = "mongodb://localhost:27017/sensor"
+MONGO_URL = "mongodb://localhost:27017/"
 
 # MongoDB Configuration
 client = MongoClient(MONGO_URL)
@@ -45,7 +45,7 @@ def run_predictions_and_create_alerts():
 
                 alert_collection.insert_one(alert_message)
                 print(f"Alert saved: {alert_message}")
-
+                time.sleep(1)
         if alerts:
             print(f"{len(alerts)} alerts created.")
         else:
@@ -56,5 +56,5 @@ def run_predictions_and_create_alerts():
 
 # Run the function to create alerts
 run_predictions_and_create_alerts()
-# time.sleep(5)
+
 
