@@ -1,5 +1,2 @@
 # Hackathon
-# Collaborators: [Vivek Sharma]
-# Collaborators: [Shobhit Kori]
-# Collaborators: [Rudra Patil]
-# Collaborators: [Ganesh Naik]
+# Collaborators: [Vivek Sharma, Shobhit Kori, Ganesh Naik, Rudra Patil] 
