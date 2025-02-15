@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { AlertCircle, CheckCircle } from "lucide-react";
 import Footer from "./Footer";
-import { fetchSensorData } from "./database";
-import data from "./data.json"
 
 export default function Dashboard() {
   const [sensorData, setSensorData] = useState([]);
@@ -14,7 +12,12 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        
+        const response = await fetch("http://localhost:5000/api/sensors");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+
         const formattedData = data.map((item) => ({
           timestamp: new Date().toLocaleTimeString(),
           footfall: item.footfall,
