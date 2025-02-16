@@ -32,7 +32,7 @@ export default function Dashboard() {
           fail: item.fail,
         }));
 
-        setSensorData((prev) => [...prev.slice(-20), ...formattedData]);
+        setSensorData((prev) => [...prev.slice(4), ...formattedData]);
       } catch (error) {
         console.error("Error fetching sensor data:", error);
       }
@@ -40,7 +40,7 @@ export default function Dashboard() {
 
     // Fetch data initially and then every 5 seconds
     fetchData();
-    const interval = setInterval(fetchData, 5000);
+    const interval = setInterval(fetchData, 30*1000);
 
     return () => clearInterval(interval);
   }, []);
